@@ -6,7 +6,7 @@ from PIL import Image
 #以下的脚本被import时不执行
 if __name__ == '__main__':
     #获取文件
-    image_file = '../lz.jpg'
+    image_file = '../zwg.png'
     #定义输出文本char高度
     height = 100
     #打开图片
