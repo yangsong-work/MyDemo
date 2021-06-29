@@ -42,7 +42,7 @@ predict_op = tf.argmax(py_x, 1)
 
 ckpt_dir = "./ckpt_dir"
 if not os.path.exists(ckpt_dir):
-    os.makedirs(ckpt_dir)
+     os.makedirs(ckpt_dir)
 # 计数器变量，设置它的trainable=False，不需要被训练
 global_step = tf.Variable(0, name='global_step', trainable=False)
 
