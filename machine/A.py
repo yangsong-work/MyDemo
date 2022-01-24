@@ -2,6 +2,16 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+
+desired_width=320
+
+pd.set_option('display.width', desired_width)
+
+# np.set_printoption(linewidth=desired_width)
+
+pd.set_option('display.max_columns',10)
+
+
 # 读取文件
 data = pd.read_csv('D:/Users/yangsong/PycharmProjects/pythonProject2/machine/titanic/train.csv')
 # 查看前几行
@@ -67,12 +77,23 @@ data.isnull().sum()
 # print('Average age on the ship:',data['Age'].mean(),'Years')
 
 #小提琴图（violinplot）
-f,ax = plt.subplots(1,2,figsize=(18,8))
-sns.violinplot('Pclass','Age',hue='Survived' ,data=data ,split=True, ax=ax[0])
-ax[0].set_title('Pclass and Age vs Survived')
-ax[0].set_yticks(range(0,110,10))
-sns.violinplot('Sex','Age',hue='Survived',data=data,split=True,ax=ax[1])
-ax[0].set_title('Sex and Age vs Survived')
-ax[0].set_yticks(range(0,110,10))
+# f,ax = plt.subplots(1,2,figsize=(18,8))
+# sns.violinplot('Pclass','Age',hue='Survived' ,data=data ,split=True, ax=ax[0])
+# ax[0].set_title('Pclass and Age vs Survived')
+# ax[0].set_yticks(range(0,110,10))
+# sns.violinplot('Sex','Age',hue='Survived',data=data,split=True,ax=ax[1])
+# ax[0].set_title('Sex and Age vs Survived')
+# ax[0].set_yticks(range(0,110,10))
+# plt.show()
+# print(ax[0])
+
+# 填充年龄
+# 切分名字
+data = pd.read_csv('D:/Users/yangsong/PycharmProjects/pythonProject2/machine/titanic/train.csv')
+data['initi'] = 0
+for i in data:
+    data['initi'] = data.Name.str.extract('([A-Za-z]+\.)')
+df = pd.crosstab(data.initi,data.Sex).T.style.background_gradient(cmap='summer_r').data.plot
 plt.show()
-print(ax[0])
+
+
