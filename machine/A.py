@@ -2,7 +2,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-
 desired_width=320
 
 pd.set_option('display.width', desired_width)
@@ -28,10 +27,10 @@ data = pd.read_csv('D:/Users/yangsong/PycharmProjects/pythonProject2/machine/tit
 # plt.show()
 # 以..为基准统计指标
 # 先按照a进行分组，再按照b进行分组，最后将b进行叠加
-print(data.groupby(['Sex','Survived'])['Survived'].count())
+# print(data.groupby(['Sex','Survived'])['Survived'].count())
 # print(data.groupby(['MATE30','no'])['MATE30'].count())
 
-data.isnull().sum()
+# data.isnull().sum()
 # print(data.describe())
 
 # 获救比例
@@ -89,11 +88,12 @@ data.isnull().sum()
 
 # 填充年龄
 # 切分名字
-data = pd.read_csv('D:/Users/yangsong/PycharmProjects/pythonProject2/machine/titanic/train.csv')
 data['initi'] = 0
 for i in data:
     data['initi'] = data.Name.str.extract('([A-Za-z]+\.)')
-df = pd.crosstab(data.initi,data.Sex).T.style.background_gradient(cmap='summer_r').data.plot
-plt.show()
+    print( data[i])
+df = pd.crosstab(data.initi,data.Sex).T.style.background_gradient(cmap='summer_r').data
+
+df.to_csv('D:/Users/yangsong/PycharmProjects/pythonProject2/machine/titanic/result1.xlsx')
 
 
