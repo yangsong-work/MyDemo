@@ -88,6 +88,7 @@ data = pd.read_csv('D:/Users/yangsong/PycharmProjects/pythonProject2/machine/tit
 
 # 填充年龄
 # 切分名字
+# .T 横着看
 data['initi'] = 0
 for i in data:
     data['initi'] = data.Name.str.extract('([A-Za-z]+\.)')
