@@ -89,12 +89,28 @@ data = pd.read_csv('D:/Users/yangsong/PycharmProjects/pythonProject2/machine/tit
 # 填充年龄
 # 切分名字
 # .T 横着看
-data['initi'] = 0
-for i in data:
-    data['initi'] = data.Name.str.extract('([A-Za-z]+\.)')
-    print( data[i])
-df = pd.crosstab(data.initi,data.Sex).T.style.background_gradient(cmap='summer_r').data
+# data['initi'] = 0
+# for i in data:
+#     data['initi'] = data.Name.str.extract('([A-Za-z]+\.)')
+#     print( data[i])
+# df = pd.crosstab(data.initi,data.Sex).T.style.background_gradient(cmap='summer_r').data
+#
+# df.to_csv('D:/Users/yangsong/PycharmProjects/pythonProject2/machine/titanic/result1.xlsx')
 
-df.to_csv('D:/Users/yangsong/PycharmProjects/pythonProject2/machine/titanic/result1.xlsx')
 
+# sns.factorplot('Embarked','Survived',data=data)
+# fig=plt.gcf()
+# fig.set_size_inches(5,3)
+# plt.show()
 
+f,ax=plt.subplots(2,2,figsize=(20,15))
+sns.countplot('Embarked',data=data,ax=ax[0,0])
+ax[0,0].set_title('No. Of Passengers Boarded')
+sns.countplot('Embarked',hue='Sex',data=data,ax=ax[0,1])
+ax[0,1].set_title('Male-Female Split for Embarked')
+sns.countplot('Embarked',hue='Survived',data=data,ax=ax[1,0])
+ax[1,0].set_title('Embarked vs Survived')
+sns.countplot('Embarked',hue='Pclass',data=data,ax=ax[1,1])
+ax[1,1].set_title('Embarked vs Pclass')
+plt.subplots_adjust(wspace=0.2,hspace=0.5)
+plt.show()
