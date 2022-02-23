@@ -12,7 +12,8 @@ pd.set_option('display.max_columns',10)
 
 
 # 读取文件
-data = pd.read_csv('D:/Users/yangsong/PycharmProjects/pythonProject2/machine/titanic/train.csv')
+# data = pd.read_csv('D:/Users/yangsong/PycharmProjects/pythonProject2/machine/titanic/train.csv')
+data = pd.read_csv('D:/Users/PycharmProjects/pyproject/machine/titanic/train.csv')
 # 查看前几行
 # print(data.head())
 # # 查看缺失值
@@ -95,6 +96,6 @@ for i in data:
     print( data[i])
 df = pd.crosstab(data.initi,data.Sex).T.style.background_gradient(cmap='summer_r').data
 
-df.to_csv('D:/Users/yangsong/PycharmProjects/pythonProject2/machine/titanic/result1.xlsx')
+df.to_csv('D:/Users/PycharmProjects/pyproject/machine/titanic/result1.csv')
 
 
