@@ -62,3 +62,22 @@ for col in ['click_article_id', 'click_timestamp', 'click_environment', 'click_d
     plt.title(col)
 plt.tight_layout()
 plt.show()
+
+#用户点击日志信息
+trn_click.info()
+
+# 直方图
+plt.figure()
+plt.figure(figsize=(15, 20))
+i = 1
+for col in ['click_article_id', 'click_timestamp', 'click_environment', 'click_deviceGroup', 'click_os', 'click_country',
+            'click_region', 'click_referrer_type', 'rank', 'click_cnts']:
+    plot_envs = plt.subplot(5, 2, i)
+    i += 1
+    v = trn_click[col].value_counts().reset_index()[:10]
+    fig = sns.barplot(x=v['index'], y=v[col])
+    for item in fig.get_xticklabels():
+        item.set_rotation(90)
+    plt.title(col)
+plt.tight_layout()
+plt.show()
