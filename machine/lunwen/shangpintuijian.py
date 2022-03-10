@@ -81,3 +81,9 @@ for col in ['click_article_id', 'click_timestamp', 'click_environment', 'click_d
     plt.title(col)
 plt.tight_layout()
 plt.show()
+
+#用户重复点击
+#####merge
+user_click_merge = trn_click.append(trn_click)
+user_click_count = user_click_merge.groupby(['user_id', 'click_article_id'])['click_timestamp'].agg({'count'}).reset_index()
+user_click_count[:10]
