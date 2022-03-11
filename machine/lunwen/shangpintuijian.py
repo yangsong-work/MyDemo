@@ -33,6 +33,55 @@ item_emb_df = pd.read_csv(path+'articles_emb.csv')
 trn_click['rank'] = trn_click.groupby(['user_id'])['click_timestamp'].rank(ascending=False).astype(int)
 # tst_click['rank'] = tst_click.groupby(['user_id'])['click_timestamp'].rank(ascending=False).astype(int)
 
+#计算用户点击文章的次数，并添加新的一列count
+trn_click['click_cnts'] = trn_click.groupby(['user_id'])['click_timestamp'].transform('count')
+# tst_click['click_cnts'] = tst_click.groupby(['user_id'])['click_timestamp'].transform('count')
+
+# 用户点击日志文件_训练集
+trn_click = trn_click.merge(item_df, how='left', on=['click_article_id'])
+trn_click.head()
+
+#训练集中的用户数量为20w
+trn_click.user_id.nunique()
+# 训练集里面每个用户至少点击了两篇文章
+trn_click.groupby('user_id')['click_article_id'].count().min()
+
+
+# 画直方图大体看一下基本的属性分布
+plt.figure()
+plt.figure(figsize=(15, 20))
+i = 1
+for col in ['click_article_id', 'click_timestamp', 'click_environment', 'click_deviceGroup', 'click_os', 'click_country',
+            'click_region', 'click_referrer_type', 'rank', 'click_cnts']:
+    plot_envs = plt.subplot(5, 2, i)
+    i += 1
+    v = trn_click[col].value_counts().reset_index()[:10]
+    fig = sns.barplot(x=v['index'], y=v[col])
+    for item in fig.get_xticklabels():
+        item.set_rotation(90)
+    plt.title(col)
+plt.tight_layout()
+plt.show()
+
+#用户点击日志信息
+trn_click.info()
+
+# 直方图
+plt.figure()
+plt.figure(figsize=(15, 20))
+i = 1
+for col in ['click_article_id', 'click_timestamp', 'click_environment', 'click_deviceGroup', 'click_os', 'click_country',
+            'click_region', 'click_referrer_type', 'rank', 'click_cnts']:
+    plot_envs = plt.subplot(5, 2, i)
+    i += 1
+    v = trn_click[col].value_counts().reset_index()[:10]
+    fig = sns.barplot(x=v['index'], y=v[col])
+    for item in fig.get_xticklabels():
+        item.set_rotation(90)
+    plt.title(col)
+plt.tight_layout()
+plt.show()
+
 #新闻文章数据集浏览
 print(item_df.head().append(item_df.tail()))
 
