@@ -16,16 +16,15 @@ save_path = 'C:/Users/ys101/Desktop/fsdownload/'
 
 # 召回数据打标签
 def get_rank_label_df(recall_list_df, label_df, is_test=False):
-        recall_list_df_  = recall_list_df['click_article_id']
-        for click_article_ids in recall_list_df_:
-            if click_article_ids in label_df:
-                recall_list_df_['label'] = '1'
+        for index, row in recall_list_df.iterrows():
+            if row['click_article_id'] in label_df:
+                recall_list_df['label'][index] = '1'
             else:
-                recall_list_df_['label'] = '0'
+                row['label'] = '0'
         # recall_list_df_['label'] = recall_list_df_['click_timestamp'].apply(lambda x: 0.0 if np.isnan(x) else 1.0)
-        print("recall_list_df_", recall_list_df_.head())
+        print("recall_list_df_", recall_list_df['click_article_id'].head())
 
-        return recall_list_df_
+        return recall_list_df
 
 
 # 获取当前数据的历史点击和最后一次点击
@@ -52,6 +51,7 @@ click_article_id_list = pd.read_csv(data_path + 'click_article_id_list111.csv')
 # feature_data.head()
 # trn_user_items_df = recall_list_df[recall_list_df['user_id'].isin(click_trn_hist['user_id'].unique())]
 list1 = tolist(click_article_id_list)
-feature_data = pd.read_csv(data_path + '1111.csv')
+feature_data = pd.read_csv(data_path + 'trn_user_item_feats_df.csv')
 print(feature_data['label'].head())
-trn_user_item_label_df = get_rank_label_df(feature_data, list1, is_test=False)
+recall_list_df_ = get_rank_label_df(feature_data, list1, is_test=False)
+recall_list_df_.to_csv(save_path+'aaa2.csv')
